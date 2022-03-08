@@ -1,11 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+// const bodyparser = require('body-parser');
 //Loads the handlebars module
-const handlebars = require('express-handlebars');
-import bodyparser from 'body-parser';
+let _handlebars = require('handlebars');
+let exphbs = require('express-handlebars');
+let {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+//check test
 //import mongoose from 'mongoose';
 //import cors from 'cors';
 var indexRouter = require('./routes/index');
@@ -29,11 +32,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 //add handlebars
-app.engine('hbs', handlebars({
+app.engine('.hbs', exphbs.engine({
 	layoutsDir: __dirname + '/views/layouts',
 	partialsDir: __dirname + '/views/partials',
+	handlebars: allowInsecurePrototypeAccess(_handlebars),
 	//new configuration parameter
-	extname: 'hbs', 
+	extname: '.hbs', 
 	defaultLayout: 'main'
 }));
 
