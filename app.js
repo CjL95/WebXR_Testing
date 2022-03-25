@@ -15,7 +15,6 @@ var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
 
 var app = express();
-
 //database name
 // var dbName = 'copFinal';
 // var dbConnection = mongoose.connection;
@@ -27,12 +26,15 @@ mongoose.connect('mongodb://localhost/' + dbName, {
 	useUnifiedTopology: true
 });*/
 
+//vhost
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 //add handlebars
-app.engine('.hbs', exphbs.engine({
+app.engine('.hbs', exphbs({
 	layoutsDir: __dirname + '/views/layouts',
 	partialsDir: __dirname + '/views/partials',
 	handlebars: allowInsecurePrototypeAccess(_handlebars),
