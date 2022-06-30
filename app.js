@@ -1,3 +1,4 @@
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 let createError = require('http-errors');
 let express = require('express');
 let path = require('path');
@@ -11,6 +12,16 @@ let {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access
 //check test
 //import mongoose from 'mongoose';
 //import cors from 'cors';
+
+//Import the entire three.js core library.
+const THREE = require('three');
+
+//Import VR compatability detection
+//import { VRButton } from 'VRButton';
+
+const scene = new THREE.Scene();
+
+
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
 

@@ -3,11 +3,10 @@
 /**
  * Module dependencies.
  */
-
+ const fs = require('fs');
 var app = require('../app');
 var debug = require('debug')('starter-simple-node:server');
-var http = require('http');
-//var https = require('https');
+var https = require('https');
 
 /**
  * Get port from environment and store in Express.
@@ -20,20 +19,23 @@ app.set('port', port);
  * Create HTTP server.
  */
 
- const fs = require('fs');
+var server = https.createServer({key: fs.readFileSync('server.key'),
+cert: fs.readFileSync('server.cert')},app).listen(port, ()=>{
+  console.log('we listenin');
+});
 
- const options = {
-   key: fs.readFileSync('server.key'),
-   cert: fs.readFileSync('server.cert')
- };
- 
- //https.createServer(options, app).listen(3000);
- http.createServer(app).listen(3000);
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+
+//server.on('listening', onListening);
+
 /**
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
+/*function normalizePort(val) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -47,13 +49,13 @@ function normalizePort(val) {
   }
 
   return false;
-}
+}*/
 
 /**
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+/*function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -75,7 +77,7 @@ function onError(error) {
     default:
       throw error;
   }
-}
+}*/
 
 /**
  * Event listener for HTTP server "listening" event.
